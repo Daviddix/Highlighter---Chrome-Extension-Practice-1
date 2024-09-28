@@ -1,0 +1,14 @@
+{
+    "manifest_version" : 3,
+    "name" : "Highlighter",
+    "description" : "Browser highlighting made easy",
+    "version" : "0.0.1",
+    "action" :{
+        "default_popup" : "./src/popup.html" 
+    },
+    "background":{
+        "service_worker":"./src/background.js"
+    },
+    "permissions" : [
+    ]
+}
