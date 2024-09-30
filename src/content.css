@@ -3,5 +3,5 @@
 }
 
 .highlight{
-    background-color: var(--highlighter-color);
+    background-color: var(--highlighter-color) !important;
 }

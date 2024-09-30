@@ -22,12 +22,19 @@ document.addEventListener("mouseup", ()=>{
 })
 
 chrome.runtime.onMessage.addListener(
-    function(request, sender, sendResponse){
-        console.log(request)
-        if(request.color == "yellow"){
-            console.log(request)
+    async function(request, sender, sendResponse){
+
+        if(Object.entries(request.color).length !== 0){
+            console.log(request.color)
+
+            document.documentElement.setAttribute("style", `--highlighter-color: ${request.color}`)
+
+            await chrome.storage.local.set({color: request.color})
+
         }else{
-            console.log("not yellow but : " + request)
+            
+            console.log("not " + request)
+
         }
 
         sendResponse({
