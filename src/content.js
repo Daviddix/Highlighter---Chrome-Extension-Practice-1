@@ -20,3 +20,18 @@ document.addEventListener("mouseup", ()=>{
     
 
 })
+
+chrome.runtime.onMessage.addListener(
+    function(request, sender, sendResponse){
+        console.log(request)
+        if(request.color == "yellow"){
+            console.log(request)
+        }else{
+            console.log("not yellow but : " + request)
+        }
+
+        sendResponse({
+            status : "seen"
+        })
+    }
+)

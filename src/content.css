@@ -1,3 +1,7 @@
+:root{
+    --highlighter-color : transparent;
+}
+
 .highlight{
-    background-color: yellow;
+    background-color: var(--highlighter-color);
 }

@@ -10,6 +10,9 @@
         "service_worker":"./src/background.js"
     },
     "permissions" : [
+        "tabs",
+        "scripting",
+        "activeTab"
     ],
     "content_scripts": [
         {
@@ -17,5 +20,7 @@
             "js": ["./src/content.js"],
             "css": ["./src/content.css"]
         }
-    ]
+    ],
+    "host_permissions": [
+        "<all_urls>"]
 }
