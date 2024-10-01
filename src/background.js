@@ -19,12 +19,12 @@ async function getColorOnInitialPageLoad(tabId) {
 }
 
 
-chrome.tabs.onActivated.addListener(async (activeInfo) => {
-            const tab = await chrome.tabs.get(activeInfo.tabId);
-
-            if (!tab.url.startsWith('chrome://') && !tab.url.startsWith('chrome-extension://')) {
-                getColorOnInitialPageLoad(activeInfo.tabId)
-            } else {
-                console.log("Cannot run on internal Chrome pages.");
-            }
+chrome.tabs.onUpdated.addListener(async (tabId,tab, changeInfo) => {
+           if (tab.status == "complete") {
+             if (!changeInfo.url.startsWith('chrome://') && !changeInfo.url.startsWith('chrome-extension://')) {
+                 getColorOnInitialPageLoad(tabId)
+             } else {
+                 console.log("Cannot run on internal Chrome pages.");
+             }
+           }
 })

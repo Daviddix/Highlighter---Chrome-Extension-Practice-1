@@ -31,3 +31,25 @@ async function changeHighlightColor(color){
         console.log(err)
     }
 }
+
+function addActiveToSpecificButton(buttonUniqueColorName){
+    removeAllClasses()
+    allButtons.forEach((button)=>{
+        if(button.dataset.color == buttonUniqueColorName){
+            button.classList.add("active")
+        }
+    })
+}
+
+async function checkStorageForCurrentColor(){
+    try{
+        const colorInStorage = await chrome.storage.local.get(["color"])
+        if(Object.entries(colorInStorage).length !== 0){
+            addActiveToSpecificButton(colorInStorage.color)
+        }
+    }catch(err){
+        console.error(err)
+    }
+}
+
+checkStorageForCurrentColor()

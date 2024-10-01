@@ -2,6 +2,7 @@
     --highlighter-color : transparent;
 }
 
-.highlight{
+span.highlight{
     background-color: var(--highlighter-color) !important;
+    display: inline-block;
 }
