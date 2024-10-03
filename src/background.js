@@ -18,11 +18,20 @@ async function getColorOnInitialPageLoad(tabId) {
     }
 }
 
+async function getPreviouslyHighlightedElementsAndUpdatePage(tabId){
+    const elementsFromStorage = await chrome.storage.local.get(["highlightedElements"])
+
+    const elementsArray = elementsFromStorage.highlightedElements || []
+
+    await chrome.tabs.sendMessage(tabId, {elementsArray})
+}
+
 
 chrome.tabs.onUpdated.addListener(async (tabId,tab, changeInfo) => {
            if (tab.status == "complete") {
              if (!changeInfo.url.startsWith('chrome://') && !changeInfo.url.startsWith('chrome-extension://')) {
-                 getColorOnInitialPageLoad(tabId)
+                 await getColorOnInitialPageLoad(tabId)
+                 await getPreviouslyHighlightedElementsAndUpdatePage(tabId)
              } else {
                  console.log("Cannot run on internal Chrome pages.");
              }
