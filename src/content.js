@@ -15,7 +15,11 @@ chrome.runtime.onMessage.addListener(
                 array.forEach((element)=>{
                     const realElement = document.querySelector(element.uniqueSelector)
 
-                    realElement.outerHTML = element.outerHTML
+                    if(realElement){
+                        realElement.outerHTML = element.outerHTML
+                    }else{
+                        return
+                    }
                 })
             }            
         }else{

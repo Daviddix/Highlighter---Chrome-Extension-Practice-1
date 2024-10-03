@@ -4,7 +4,13 @@
     "description" : "Browser highlighting made easy",
     "version" : "0.0.1",
     "action" :{
-        "default_popup" : "./src/popup.html" 
+        "default_popup" : "./src/popup.html",
+        "default_icon": {
+            "16": "./src/assets/images/icon.png",
+            "32": "./src/assets/images/icon-32.png",
+            "48": "./src/assets/images/icon-48.png",
+            "128": "./src/assets/images/icon-128.png"
+        }
     },
     "background":{
         "service_worker":"./src/background.js"
