@@ -26,12 +26,36 @@ async function getPreviouslyHighlightedElementsAndUpdatePage(tabId){
     await chrome.tabs.sendMessage(tabId, {elementsArray})
 }
 
+async function getSwitchStatus(tabId){
+    const statusInStorage = await chrome.storage.local.get(["switch"])
+
+    const switchStatus = statusInStorage.switch || "off"
+
+    if(switchStatus == "off"){
+        chrome.action.setIcon( {
+            path : 
+            {32 : "./assets/images/inactive-icon.png"}
+        })
+    }else if(switchStatus == "on"){
+        chrome.action.setIcon( {
+            path : 
+            {32 : "./assets/images/icon-32.png"}
+        }
+    )
+    }
+
+    await chrome.tabs.sendMessage(tabId, {switch :switchStatus})
+    
+}
+
+
 
 chrome.tabs.onUpdated.addListener(async (tabId,tab, changeInfo) => {
            if (tab.status == "complete") {
              if (!changeInfo.url.startsWith('chrome://') && !changeInfo.url.startsWith('chrome-extension://')) {
                  await getColorOnInitialPageLoad(tabId)
                  await getPreviouslyHighlightedElementsAndUpdatePage(tabId)
+                 await getSwitchStatus(tabId)
              } else {
                  console.log("Cannot run on internal Chrome pages.");
              }

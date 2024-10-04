@@ -17,7 +17,6 @@ html{
 body.h{
     width:25rem;
     padding: 1rem;
-    border:solid;
     background-image: linear-gradient(#ffbb0023, #fafafa);
     background-size: 25rem;
     background-repeat: no-repeat;
@@ -56,7 +55,7 @@ body > h2{
 .colors-container .color-container > div{
     width: 2rem;
     height: 2rem;
-    margin:1rem 0;
+    margin:0rem 0 1rem;
     border-radius: 4px;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
@@ -129,7 +128,7 @@ button.switch{
     font-weight: 600;
     border: 1px solid #fafafa;
     background-color: white;
-    box-shadow: 0 .2rem .4rem .1rem rgba(0, 0, 0, 0.103);
+    box-shadow: 0 .2rem .4rem .1rem rgba(0, 0, 0, 0.048);
     border-radius: 5px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
@@ -141,4 +140,9 @@ button.switch{
     -moz-transition: all ease-in-out .2s;
     -ms-transition: all ease-in-out .2s;
     -o-transition: all ease-in-out .2s;
+}
+
+button.switch.active{
+    background-color: #ffbb00;
+    color: white;
 }

@@ -1,28 +1,50 @@
-document.addEventListener("mouseup",async ()=>{
-    highlightText()
-})
-
 chrome.runtime.onMessage.addListener(
     async function(request, sender, sendResponse){
+
         if(request.color){
+
             document.documentElement.setAttribute("style", `--highlighter-color: ${request.color}`)
 
             await chrome.storage.local.set({color: request.color})
 
         }else if(request.elementsArray){
+
             const array = request.elementsArray
+
             if(array.length !== 0){
+
                 array.forEach((element)=>{
+
                     const realElement = document.querySelector(element.uniqueSelector)
 
                     if(realElement){
+
                         realElement.outerHTML = element.outerHTML
+
                     }else{
                         return
                     }
                 })
             }            
-        }else{
+        }else if(request.switch){
+
+            const status = request.switch
+
+            if(status == "on"){
+
+                document.addEventListener("mouseup", highlightText)
+          
+            }else if(status == "off"){
+
+                document.removeEventListener("mouseup", highlightText)
+
+            }
+
+            await chrome.storage.local.set({
+                switch : status
+            })
+        }
+        else{
             console.log("not " + request)
 
         }
